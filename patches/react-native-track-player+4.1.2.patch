@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-track-player/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt b/node_modules/react-native-track-player/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
+index 1234567..abcdefg 100644
+--- a/node_modules/react-native-track-player/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
++++ b/node_modules/react-native-track-player/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
+@@ -545,7 +545,7 @@ class MusicModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
+             val track = TrackPlayer.playbackManager.queue.currentTrack
+             val bundle = track?.originalTrack?.toJson()?.toBundle()
+             val metadataBundle = track?.metadata?.toBundle()
+-            sendEvent(Event.TrackMetadataReceived.eventName, bundle)
++            sendEvent(Event.TrackMetadataReceived.eventName, bundle ?: Bundle())
+             sendEvent(Event.PlaybackTrackChanged.eventName, metadataBundle)
+         }
+ 
+@@ -585,7 +585,7 @@ class MusicModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
+         override fun onMetadataReceived(source: String, data: Bundle) {
+             val bundle = Arguments.createMap()
+             bundle.putBundle(data.getString("key"), data)
+-            sendEvent(Event.PlaybackMetadataReceived.eventName, bundle)
++            sendEvent(Event.PlaybackMetadataReceived.eventName, bundle ?: Bundle())
+         }
+ 
+         override fun onMetadataTimedReceived(metadata: MutableList<TimedMetadata>) {
